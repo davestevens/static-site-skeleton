@@ -1,11 +1,15 @@
 {
   "name": "static-site-skeleton",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Static Site Skeleton",
   "scripts": {
     "start": "http-server web",
     "build": "gulp build",
     "watch": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:davestevens/static-site-skeleton.git"
   },
   "author": "Dave Stevens",
   "license": "MIT",
