@@ -31,7 +31,8 @@ Files from `src/sass` are compiled into the `web/css` directory.
 Any files with names beginning with and underscore are ignored, this is used for partials and so are not included directly in output.
 
 ### JS
-**TODO**
+Files from `src/coffee` are compiled into the `web/js` directory.
+I am using [RequireJS](http://requirejs.org/) for dependency management, this creates a single `app.js` file which contains the full JavaScript code (including vendor files). The `requirejs` task in the gulpfile compiles all CoffeeScript code, runs r.js and copies require.js to `web/js/vendor`.
 
 ### Fonts
 Files and directories in `src/fonts` are copied into the `web/fonts` directory.
@@ -41,6 +42,9 @@ Files and directories in `src/images` are copied into the `web/images` directory
 
 ## TODO
 
-- [ ] Use RequireJS for JS dependency management
+- [x] Use RequireJS for JS dependency management
+- [x] Use r.js
+- [ ] Investigate different ways of JS dependency management?
+- [ ] Production/Development builds
 - [ ] Exporting
 - [ ] Deploying
