@@ -28,27 +28,11 @@ gulp.task("sass", ->
 )
 
 # Compile .coffee files to .js files
-coffee = require("gulp-coffee")
-gulp.task("coffee", ->
+coffeeify = require("gulp-coffeeify")
+gulp.task("scripts", ->
   gulp.src("src/coffee/**/*.coffee")
-    .pipe(
-      coffee(
-        bare: true
-      )
-    )
-    .pipe(gulp.dest("web/js/"))
-)
-# Copy require.js to web/js/vendor
-gulp.task("copy:requirejs", ->
-  gulp.src("node_modules/requirejs/require.js")
-    .pipe(gulp.dest("web/js/vendor"))
-)
-# Build RequireJS
-rjs = require("gulp-requirejs")
-build = require("./build.json")
-gulp.task("requirejs", ["coffee", "copy:requirejs"], ->
-  rjs(build)
-    .pipe(gulp.dest("web/js/"))
+    .pipe(coffeeify())
+    .pipe(gulp.dest("web/js"))
 )
 
 # Copy any font files
@@ -65,8 +49,7 @@ gulp.task("copy:images", ->
 gulp.task("watch", ->
   gulp.watch("src/jade/**/*.jade", ["jade"])
   gulp.watch("src/sass/**/*.scss", ["sass"])
-  gulp.watch("src/coffee/**/*.coffee", ["requirejs"])
-  gulp.watch("build.json", ["requirejs"])
+  gulp.watch("src/coffee/**/*.coffee", ["scripts"])
   gulp.watch("src/fonts/**/*", ["copy:fonts"])
   gulp.watch("src/images/**/*", ["copy:images"])
 )
@@ -74,7 +57,7 @@ gulp.task("watch", ->
 gulp.task("build", [
   "jade",
   "sass",
-  "requirejs",
+  "scripts",
   "copy:fonts",
   "copy:images"
 ])

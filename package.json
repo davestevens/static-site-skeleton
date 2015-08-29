@@ -10,16 +10,15 @@
   "author": "Dave Stevens",
   "license": "MIT",
   "devDependencies": {
+    "browserify": "^11.0.1",
     "coffee-script": "^1.9.3",
+    "coffeeify": "^1.1.0",
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
+    "gulp-coffeeify": "^0.1.8",
     "gulp-jade": "^1.1.0",
-    "gulp-requirejs": "^0.1.3",
     "gulp-sass": "^2.0.4",
     "http-server": "^0.8.0",
     "jade": "^1.11.0"
-  },
-  "dependencies": {
-    "requirejs": "^2.1.20"
   }
 }
