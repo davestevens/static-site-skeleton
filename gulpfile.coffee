@@ -2,7 +2,7 @@ gulp = require("gulp")
 
 # Compile .jade files to .html files
 jade = require("gulp-jade")
-gulp.task("jade", ->
+gulp.task("html", ->
   gulp.src("src/jade/**/[^_]*.jade")
     .pipe(
       jade(
@@ -14,7 +14,7 @@ gulp.task("jade", ->
 
 # Compile .scss files to .css files
 sass = require("gulp-sass")
-gulp.task("sass", ->
+gulp.task("styles", ->
   gulp.src("src/sass/**/[^_]*.scss")
     .pipe(
       sass(
@@ -47,16 +47,16 @@ gulp.task("copy:images", ->
 )
 
 gulp.task("watch", ->
-  gulp.watch("src/jade/**/*.jade", ["jade"])
-  gulp.watch("src/sass/**/*.scss", ["sass"])
+  gulp.watch("src/jade/**/*.jade", ["html"])
+  gulp.watch("src/sass/**/*.scss", ["styles"])
   gulp.watch("src/coffee/**/*.coffee", ["scripts"])
   gulp.watch("src/fonts/**/*", ["copy:fonts"])
   gulp.watch("src/images/**/*", ["copy:images"])
 )
 
 gulp.task("build", [
-  "jade",
-  "sass",
+  "html",
+  "styles",
   "scripts",
   "copy:fonts",
   "copy:images"
