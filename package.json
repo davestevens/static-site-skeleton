@@ -4,6 +4,7 @@
   "description": "Static Site Skeleton",
   "scripts": {
     "start": "http-server web",
+    "clean": "rm -rf web/*",
     "build": "gulp build",
     "watch": "gulp"
   },

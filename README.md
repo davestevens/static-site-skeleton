@@ -20,6 +20,15 @@ Compiles all files into `web` directory.
 `npm run watch`
 Compiles all files into `web` directory and watches for any changes.
 
+## Deploying
+
+### Github Pages
+
+```shell
+bash deploy.sh
+```
+Builds all files and pushes to `gh-pages` branch.
+
 ## Notes
 
 ### HTML
