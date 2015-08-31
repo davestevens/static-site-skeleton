@@ -1,4 +1,9 @@
 gulp = require("gulp")
+gutil = require("gulp-util")
+
+log_error = (error) ->
+  gutil.log(gutil.colors.red(error.toString()))
+  @emit("end")
 
 # Compile .jade files to .html files
 jade = require("gulp-jade")
@@ -7,7 +12,7 @@ gulp.task("html", ->
     .pipe(
       jade(
         pretty: true
-      )
+      ).on("error", log_error)
     )
     .pipe(gulp.dest("web/"))
 )
@@ -22,7 +27,7 @@ gulp.task("styles", ->
         sassDir: "src/sass/"
         cssDir: "web/css/"
         sourcemap: true
-      )
+      ).on("error", log_error)
     )
     .pipe(gulp.dest("web/css/"))
 )
@@ -31,7 +36,10 @@ gulp.task("styles", ->
 coffeeify = require("gulp-coffeeify")
 gulp.task("scripts", ->
   gulp.src("src/coffee/**/*.coffee")
-    .pipe(coffeeify())
+    .pipe(
+      coffeeify()
+        .on("error", log_error)
+    )
     .pipe(gulp.dest("web/js"))
 )
 
