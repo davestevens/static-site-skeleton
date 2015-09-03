@@ -54,6 +54,6 @@ Files and directories in `src/images` are copied into the `web/images` directory
 - [x] ~~Use RequireJS for JS dependency management~~
 - [x] ~~Use r.js~~
 - [x] Investigate different ways of JS dependency management?
-- [ ] Production/Development builds
+- [x] Production/Development builds
 - [ ] Exporting
 - [ ] Deploying

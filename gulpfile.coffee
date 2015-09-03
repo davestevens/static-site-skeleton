@@ -1,44 +1,39 @@
 gulp = require("gulp")
 gutil = require("gulp-util")
+jade = require("gulp-jade")
+sass = require("gulp-sass")
+coffeeify = require("gulp-coffeeify")
 
 log_error = (error) ->
   gutil.log(gutil.colors.red(error.toString()))
   @emit("end")
 
+options = require("./config.json")
+config = options.development
+
 # Compile .jade files to .html files
-jade = require("gulp-jade")
 gulp.task("html", ->
   gulp.src("src/jade/**/[^_]*.jade")
     .pipe(
-      jade(
-        pretty: true
-      ).on("error", log_error)
+      jade(config.jade).on("error", log_error)
     )
     .pipe(gulp.dest("web/"))
 )
 
 # Compile .scss files to .css files
-sass = require("gulp-sass")
 gulp.task("styles", ->
   gulp.src("src/sass/**/[^_]*.scss")
     .pipe(
-      sass(
-        outputStyle: "nested"
-        sassDir: "src/sass/"
-        cssDir: "web/css/"
-        sourcemap: true
-      ).on("error", log_error)
+      sass(config.sass).on("error", log_error)
     )
     .pipe(gulp.dest("web/css/"))
 )
 
 # Compile .coffee files to .js files
-coffeeify = require("gulp-coffeeify")
 gulp.task("scripts", ->
   gulp.src("src/coffee/**/*.coffee")
     .pipe(
-      coffeeify()
-        .on("error", log_error)
+      coffeeify(config.coffeeify).on("error", log_error)
     )
     .pipe(gulp.dest("web/js"))
 )
@@ -62,11 +57,15 @@ gulp.task("watch", ->
   gulp.watch("src/images/**/*", ["copy:images"])
 )
 
+gulp.task("development", -> config = options.development)
+gulp.task("production", -> config = options.production)
+
 gulp.task("build", [
+  "production",
   "html",
   "styles",
   "scripts",
   "copy:fonts",
   "copy:images"
 ])
-gulp.task("default", ["build", "watch"])
+gulp.task("default", ["development", "build", "watch"])
