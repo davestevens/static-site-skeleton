@@ -65,7 +65,7 @@ gulp.task("clear:web", ->
 )
 
 gulp.task("package", ->
-  gulp.src("web/*")
+  gulp.src("web/**/*", base: ".")
     .pipe(zip("export.zip"))
     .pipe(gulp.dest("."))
 )
