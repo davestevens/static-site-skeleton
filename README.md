@@ -29,6 +29,11 @@ bash deploy.sh
 ```
 Builds all files and pushes to `gh-pages` branch.
 
+## Export
+`npm run export`
+
+Produces a zip file of `web` directory.
+
 ## Notes
 
 ### HTML
@@ -55,5 +60,5 @@ Files and directories in `src/images` are copied into the `web/images` directory
 - [x] ~~Use r.js~~
 - [x] Investigate different ways of JS dependency management?
 - [x] Production/Development builds
-- [ ] Exporting
+- [x] Exporting
 - [ ] Deploying

@@ -3,6 +3,9 @@ gutil = require("gulp-util")
 jade = require("gulp-jade")
 sass = require("gulp-sass")
 coffeeify = require("gulp-coffeeify")
+del = require("del")
+run_sequence = require("gulp-run-sequence")
+zip = require("gulp-zip")
 
 log_error = (error) ->
   gutil.log(gutil.colors.red(error.toString()))
@@ -57,6 +60,16 @@ gulp.task("watch", ->
   gulp.watch("src/images/**/*", ["copy:images"])
 )
 
+gulp.task("clear:web", ->
+  del("web/*")
+)
+
+gulp.task("package", ->
+  gulp.src("web/*")
+    .pipe(zip("export.zip"))
+    .pipe(gulp.dest("."))
+)
+
 gulp.task("development", -> config = options.development)
 gulp.task("production", -> config = options.production)
 
@@ -68,4 +81,11 @@ gulp.task("build", [
   "copy:fonts",
   "copy:images"
 ])
+gulp.task("export", run_sequence(
+    "production",
+    "clear:web",
+    "build"
+    "package"
+  )
+)
 gulp.task("default", ["development", "build", "watch"])
